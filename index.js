@@ -10,9 +10,14 @@ const app = express();
 // Init middleware 
 // app.use(logger);
 
+// Body parser middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended : false }));
+
 // Creating a middleware
 app.use(express.static(path.join(__dirname,'public')));
 
+// Members API routes
 app.use('/api/members', require('./routes/api/members'));
 
 // Sending a file
