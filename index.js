@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 
-const members = require('./Members');
 const logger = require('./middleware/logger')
 
 const app = express();
@@ -9,13 +8,12 @@ const app = express();
 // Middleware
 
 // Init middleware 
-app.use(logger);
-
-// Gets all members
-app.get('/api/members', (req, res) => res.json(members));
+// app.use(logger);
 
 // Creating a middleware
-app.use(express.static(path.join(__dirname,'public')))
+app.use(express.static(path.join(__dirname,'public')));
+
+app.use('/api/members', require('./routes/api/members'));
 
 // Sending a file
 // app.get('/',  (req, res) => {
